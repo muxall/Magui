@@ -14,7 +14,7 @@
             MouseMove="Node_MouseMove"
             RenderTransformOrigin="0.5,0.5">
             <Rectangle.Fill>
-                <ImageBrush ImageSource="router.jpg"  />
+                <ImageBrush ImageSource="Images/router.jpg"  />
             </Rectangle.Fill>
             <Rectangle.ContextMenu>
                 <ContextMenu>

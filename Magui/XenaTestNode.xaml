@@ -17,7 +17,7 @@
                 <DropShadowEffect/>
             </Rectangle.Effect>
             <Rectangle.Fill>
-                <ImageBrush ImageSource="Xena.jpg"  />
+                <ImageBrush ImageSource="Images/Xena.jpg"  />
             </Rectangle.Fill>
             <Rectangle.ContextMenu>
                 <ContextMenu>
