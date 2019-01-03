@@ -5,5 +5,5 @@ Magui (pronounced: mah-gw-eye) is an acronym for Muxall Automation GUI.  The goa
 
 Magui is developed using Microsoft’s Window Presentation Foundation (WPF) which is a subset of the .NET framework.  Magui is coded in Visual BASIC using Microsoft Visual Studio Community 2017’s IDE.  Magui is Open Source software licensed under the MIT License.
 
-To learn more about the design and layout of the Magui, see <a href="https://www.youtube.com/c/NetworkEngineeringVideoBlog">Network Engineering Video Blog</a> .
+To learn more about the design and layout of Magui, see <a href="https://www.youtube.com/c/NetworkEngineeringVideoBlog">Network Engineering Video Blog</a> .
 
