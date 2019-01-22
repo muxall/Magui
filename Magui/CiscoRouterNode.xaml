@@ -9,10 +9,13 @@
 
     <Canvas Name="ucCanvas" Height="450" Width="800" >
       
-        <Rectangle x:Name ="ucNode" Height="60" Width="90"
+        <Rectangle x:Name ="ucNode"  
+            Height="60" Width="90"
             MouseDown="Node_MouseDown"
             MouseMove="Node_MouseMove"
-            RenderTransformOrigin="0.5,0.5">
+            MouseUp="Node_MouseUp"
+            Canvas.Left="10" Canvas.Top="10">
+            <!--'Added default values for canvas left and top-->
             <Rectangle.Fill>
                 <ImageBrush ImageSource="Images/router.jpg"  />
             </Rectangle.Fill>

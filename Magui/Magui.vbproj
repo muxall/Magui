@@ -82,6 +82,13 @@
     <Compile Include="CiscoRouterNode.xaml.vb">
       <DependentUpon>CiscoRouterNode.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Link.xaml.vb">
+      <DependentUpon>Link.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="LinkEditor.xaml.vb">
+      <DependentUpon>LinkEditor.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ModGlobals.vb" />
     <Compile Include="XenaTestNode.xaml.vb">
       <DependentUpon>XenaTestNode.xaml</DependentUpon>
     </Compile>
@@ -91,6 +98,14 @@
     <Page Include="CiscoRouterNode.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Link.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="LinkEditor.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="XenaTestNode.xaml">
       <Generator>MSBuild:Compile</Generator>

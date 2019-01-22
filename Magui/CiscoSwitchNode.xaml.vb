@@ -22,6 +22,7 @@ Public Class CiscoSwitchNode
 
     Private Sub SendCmd_Node(ByVal sender As Object, ByVal e As MouseButtonEventArgs)
         Dim switch As New CiscoClient
+        switch.Owner = Window.GetWindow(Me)
         switch.Show()
         Debug.WriteLine("SendCmd Node Clicked! Node: ")
 

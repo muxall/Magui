@@ -8,16 +8,18 @@
         Title="Muxall Automation GUI" >
 
     <Window.ContextMenu>
-        <ContextMenu >
+        <ContextMenu>
             <ListBoxItem Content="Add Router" MouseUp="Add_Router" />
             <ListBoxItem Content="Add Switch" MouseUp="Add_Switch" />
             <ListBoxItem Content="Add TestSet" MouseUp="Add_TestSet" />
+            <!--Not sure which is better? Maybe someone knows?-->
             <ListBoxItem Content="Add Link" MouseUp="Add_Link" />
+            <!--<MenuItem Header="Add Link" Click="Add_Link"/>-->
+
         </ContextMenu>
     </Window.ContextMenu>
     
     <Canvas Name="canvasMain" >
-        
         <!--<local:Node/>-->
     </Canvas>
  

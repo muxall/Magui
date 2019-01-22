@@ -12,7 +12,7 @@
         <Rectangle x:Name ="ucNode" Height="50" Width="100"
             MouseDown="Node_MouseDown"
             MouseMove="Node_MouseMove"
-            RenderTransformOrigin="0.5,0.5">
+            RenderTransformOrigin="0.5,0.5" Canvas.Left="10" Canvas.Top="10">
             <Rectangle.Fill>
                 <ImageBrush ImageSource="Images/workgroup_switch.jpg"  />
             </Rectangle.Fill>

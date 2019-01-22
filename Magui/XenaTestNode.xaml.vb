@@ -22,6 +22,7 @@ Public Class XenaTestNode
 
     Private Sub SendCmd_Node(ByVal sender As Object, ByVal e As MouseButtonEventArgs)
         Dim xena As New XenaClient
+        xena.Owner = Window.GetWindow(Me)
         xena.Show()
         Debug.WriteLine("SendCmd Node Clicked! Node: ")
 
