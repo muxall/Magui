@@ -7,6 +7,8 @@ Magui is developed using Microsoft’s Window Presentation Foundation (WPF) whic
 
 To learn more about the design and layout of Magui, see <a href="https://www.youtube.com/c/NetworkEngineeringVideoBlog">Network Engineering Video Blog</a> .
 
+<h2>How-To Videos</h2>
+
 <a href="https://youtu.be/H5nAhSlopvg">NE #71 Windows Presentation Foundation (WPF) app from scratch - Starting Magui</a>
 
 <a href="https://youtu.be/H5nAhSlopvg">NE #72 WPF Drag-And-Drop aka Runtime Moving A Control With Mouse</a>
