@@ -1,14 +1,16 @@
-﻿<UserControl x:Class="CiscoRouterNode"
+﻿<UserControl x:Name="xamlName"
+             x:Class="CiscoRouterNode"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Magui"
+             xmlns:My="clr-namespace:Magui.My"           
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
 
-    <Canvas Name="ucCanvas" Height="450" Width="800" >
-      
+    <Canvas x:Name="ucCanvas" >
+
         <Rectangle x:Name ="ucNode"  
             Height="60" Width="90"
             MouseDown="Node_MouseDown"
@@ -17,8 +19,19 @@
             Canvas.Left="10" Canvas.Top="10">
             <!--'Added default values for canvas left and top-->
             <Rectangle.Fill>
-                <ImageBrush ImageSource="Images/router.jpg"  />
+                <VisualBrush>
+                    <VisualBrush.Visual>
+                        <StackPanel>
+                            <StackPanel.Background>
+                                <ImageBrush ImageSource="Images/router.jpg"  />
+                            </StackPanel.Background>
+                            <TextBlock  Margin="10,40,10,10" Foreground="White" Text="{Binding Name, ElementName=xamlName}"/>
+                        </StackPanel>
+                    </VisualBrush.Visual>
+                </VisualBrush>
+                <!--<ImageBrush ImageSource="Images/router.jpg"  />-->
             </Rectangle.Fill>
+
             <Rectangle.ContextMenu>
                 <ContextMenu>
                     <ListBoxItem Content="SendCmd" MouseUp="SendCmd_Node" />
@@ -26,8 +39,9 @@
                     <ListBoxItem Content="Delete" MouseUp="Delete_Node" />
                 </ContextMenu>
             </Rectangle.ContextMenu>
+
         </Rectangle>
 
     </Canvas>
-    
+
 </UserControl>

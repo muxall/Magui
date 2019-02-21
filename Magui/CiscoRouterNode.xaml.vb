@@ -6,22 +6,19 @@ Public Class CiscoRouterNode
 
     Private mouseLocation As Point
     Private pointOrig As Point
-    'Private transPoint As TranslateTransform
     Private isMoved As Boolean = False
-
 
 
     Public Sub New()
         ' This call is required by the designer.
         InitializeComponent()
         pointOrig = New Point(0.0, 0.0)
+        Me.Name = "className"
+        Debug.WriteLine("My Class Name = " & Me.Name)
     End Sub
 
-    Public Function GetLocation()
-        'Dim tt As TranslateTransform = ucNode.RenderTransform**
-        'Dim myLocation = New Point(tt.X, tt.Y)
-        'Debug.WriteLine("myLocation.x = " & tt.X & " myLocation.y = " & tt.Y)
 
+    Public Function GetLocation()
         Dim xLeft As Double = Canvas.GetLeft(ucNode)
         Dim yTop As Double = Canvas.GetTop(ucNode)
         Dim xMiddle = (xLeft + ucNode.Width / 2)
@@ -44,6 +41,7 @@ Public Class CiscoRouterNode
     Private Sub Edit_Node(ByVal sender As Object, ByVal e As MouseButtonEventArgs)
 
         Debug.WriteLine("Edit Node Clicked! Node: ")
+        Debug.WriteLine("My Class Name = " & Me.Name)
 
     End Sub
 
@@ -64,9 +62,6 @@ Public Class CiscoRouterNode
         pointOrig = New Point(myLocation.X, myLocation.Y)
         'Debug.WriteLine("pointOrig.x = " & pointOrig.X & " pointOrig.y = " & pointOrig.Y)
 
-        'transPoint = New TranslateTransform(pointOrig.X, pointOrig.Y)
-        'Debug.WriteLine("transPoint.x = " & transPoint.X & " transPoint.y = " & transPoint.Y)
-
     End Sub
 
     Private Sub Node_MouseMove(ByVal sender As System.Object, ByVal e As System.Windows.Input.MouseEventArgs)
@@ -74,22 +69,12 @@ Public Class CiscoRouterNode
         mouseLocation = e.GetPosition(ucCanvas)
 
         If e.LeftButton = MouseButtonState.Pressed Then
-            'transPoint.X = (mouseLocation.X - pointOrig.X)
-            'transPoint.Y = (mouseLocation.Y - pointOrig.Y)
-            'ucNode.RenderTransform = transPoint
-
             Canvas.SetLeft(ucNode, (mouseLocation.X - pointOrig.X))
             Canvas.SetTop(ucNode, (mouseLocation.Y - pointOrig.Y))
             isMoved = True  'node has been moved
 
-            'Dim cvsLeft As Double = Canvas.GetLeft(ucNode)
-            'Dim cvsTop As Double = Canvas.GetTop(ucNode)
-            'Debug.WriteLine("X = " & cvsLeft & " Y = " & cvsTop)
-
             'Debug.WriteLine("mouseLocation.x = " & mouseLocation.X & " mouseLocation.y = " & mouseLocation.Y)
             'Debug.WriteLine("pointOrig.x = " & pointOrig.X & " pointOrig.y = " & pointOrig.Y)
-            'Debug.WriteLine("transPoint.x = " & transPoint.X & " transPoint.y = " & transPoint.Y)
-
         End If
 
     End Sub
