@@ -16,3 +16,5 @@ To learn more about the design and layout of Magui, see <a href="https://www.you
 <a href="https://youtu.be/TttQkCQ_8ms">NE #74 WPF How to code using Shape.Line drawings for node links.</a>
 
 <a href="https://youtu.be/KneRGrq2OrU">NE #76 WPF How to add label to rectangle and text binding UC.Name property</a>
+
+<a href="https://youtu.be/7kiX8m-JSbs">NE #77 WPF Inherit Derived Class Functionality from a Base Class UserControl</a>
