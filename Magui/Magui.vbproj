@@ -49,7 +49,7 @@
     <OptionInfer>On</OptionInfer>
   </PropertyGroup>
   <PropertyGroup>
-    <ApplicationIcon>favicon.ico</ApplicationIcon>
+    <ApplicationIcon>Images\favicon.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Renci.SshNet, Version=2016.1.0.0, Culture=neutral, PublicKeyToken=1cee9f8bde3db106, processorArchitecture=MSIL">
@@ -82,6 +82,7 @@
     <Compile Include="CiscoRouterNode.xaml.vb">
       <DependentUpon>CiscoRouterNode.xaml</DependentUpon>
     </Compile>
+    <Compile Include="ClassNode.vb" />
     <Compile Include="Link.xaml.vb">
       <DependentUpon>Link.xaml</DependentUpon>
     </Compile>
@@ -203,7 +204,7 @@
     <Resource Include="Images\workgroup_switch.jpg" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="favicon.ico" />
+    <Resource Include="Images\favicon.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
 </Project>

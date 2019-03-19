@@ -5,34 +5,50 @@ Public Class MainWindow
 
     Private Sub Add_Router(ByVal sender As Object, ByVal e As MouseButtonEventArgs)
         Dim idx As Integer
-        Dim router As New CiscoRouterNode
+        Dim Router As New CiscoRouterNode
 
-        idx = canvasMain.Children.Add(router)   'idx is a unique on the canvas.
-        router.nodeIdx = idx                    'update the default index 0 to new index
-        router.Name = "router_" & idx           'give the router a unique name.
+        idx = canvasMain.Children.Add(Router)   'idx is a unique on the canvas.
+        Router.nodeIdx = idx                    'update the default index 0 to new index
+        Router.Name = "Router_" & idx           'give the Router a unique name.
 
-        Canvas.SetZIndex(router, 10)            'Move the router image to the foreground.
+        Canvas.SetZIndex(Router, 10)            'Move the Router image to the foreground.
 
-        'router.Name is the searchable key in the collection of nodes.
-        colNodes.Add(router, router.Name)
+        'Router.Name is the searchable key in the collection of nodes.
+        colNodes.Add(Router, Router.Name)
 
-        Debug.WriteLine("Add Router " & router.Name)
+        Debug.WriteLine("Add Router " & Router.Name)
 
     End Sub
 
 
     Private Sub Add_Switch(ByVal sender As Object, ByVal e As MouseButtonEventArgs)
         Dim idx As Integer
-        Dim switch As New CiscoSwitchNode
-        idx = canvasMain.Children.Add(switch)
-        Debug.WriteLine("Add Switch Clicked! canvasIndex = " & idx)
+        Dim Eswitch As New CiscoSwitchNode
+        idx = canvasMain.Children.Add(Eswitch)
+        Eswitch.nodeIdx = idx                    'update the default index 0 to new index
+        Eswitch.Name = "Eswitch_" & idx           'give the Eswitch a unique name.
+
+        Canvas.SetZIndex(Eswitch, 10)            'Move the Eswitch image to the foreground.
+
+        'Eswitch.Name is the searchable key in the collection of nodes.
+        colNodes.Add(Eswitch, Eswitch.Name)
+
+        Debug.WriteLine("Add Eswitch Clicked! canvasIndex = " & idx)
 
     End Sub
 
     Private Sub Add_TestSet(ByVal sender As Object, ByVal e As MouseButtonEventArgs)
         Dim idx As Integer
-        Dim xena As New XenaTestNode
-        idx = canvasMain.Children.Add(xena)
+        Dim Xena As New XenaTestNode
+        idx = canvasMain.Children.Add(Xena)
+        Xena.nodeIdx = idx                    'update the default index 0 to new index
+        Xena.Name = "Xena_" & idx           'give the Xena a unique name.
+
+        Canvas.SetZIndex(Xena, 10)            'Move the Xena image to the foreground.
+
+        'Xena.Name is the searchable key in the collection of nodes.
+        colNodes.Add(Xena, Xena.Name)
+
         Debug.WriteLine("Add Xena TestSet Clicked! canvasIndex = " & idx)
 
     End Sub
