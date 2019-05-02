@@ -2,8 +2,8 @@
 Public Class ClassNode : Inherits UserControl
     'Abstract Class for all Nodes with polymorphism.
 
-    Public nodeType = "node"
-    Public nodeIdx = 0
+    Public nodeType As String = "node"
+    Public nodeIdx As Integer = 0
 
     Private mouseLocation As Point
     Private pointOrig As Point
@@ -11,6 +11,29 @@ Public Class ClassNode : Inherits UserControl
 
     Public Property dNode As Rectangle
     Public Property dCanvas As Canvas
+
+    ' Create a custom routed event by first registering a RoutedEventID
+    ' This event uses the bubbling routing strategy
+    Public Shared ReadOnly DeleteNodeEvent As RoutedEvent = EventManager.RegisterRoutedEvent(
+        "DeleteNode",
+        RoutingStrategy.Bubble,
+        GetType(RoutedEventHandler),
+        GetType(ClassNode))
+
+    ' Provide CLR accessors for the event
+    Public Custom Event DeleteNode As RoutedEventHandler
+        AddHandler(ByVal value As RoutedEventHandler)
+            Me.AddHandler(DeleteNodeEvent, value)
+        End AddHandler
+
+        RemoveHandler(ByVal value As RoutedEventHandler)
+            Me.RemoveHandler(DeleteNodeEvent, value)
+        End RemoveHandler
+
+        RaiseEvent(ByVal sender As Object, ByVal e As RoutedEventArgs)
+            Me.RaiseEvent(e)
+        End RaiseEvent
+    End Event
 
 
     Public Sub New()
@@ -38,13 +61,18 @@ Public Class ClassNode : Inherits UserControl
     End Sub
 
     Public Sub Delete_Node(ByVal sender As Object, ByVal e As MouseButtonEventArgs)
-        Debug.WriteLine("Delete Node Clicked! Node: ")
+        Debug.WriteLine("ClassNode Delete_Node Clicked!")
         pointOrig = e.GetPosition(dNode)
         Debug.WriteLine("pointOrig.X = " & pointOrig.X & " pointOrig.Y = " & pointOrig.Y)
         Debug.WriteLine("my nodeId = " & Me.nodeIdx & " my nodeType = " & Me.nodeType & vbNewLine)
-        'colNodes.Remove(Me.nodeId)
+
+        'Bubble up the delete event to the MainWindow for processing.
+        Dim newEventArgs As New RoutedEventArgs(DeleteNodeEvent)
+        Me.RaiseEvent(newEventArgs)
 
     End Sub
+
+
 
     Public Sub Node_MouseDown(ByVal sender As Object, ByVal e As MouseButtonEventArgs)
 

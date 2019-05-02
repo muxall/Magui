@@ -5,6 +5,29 @@
     Public nodeA As Object
     Public nodeB As Object
 
+    ' Create a custom routed event by first registering a RoutedEventID
+    ' This event uses the bubbling routing strategy
+    Public Shared ReadOnly DeleteLinkEvent As RoutedEvent = EventManager.RegisterRoutedEvent(
+        "DeleteLink",
+        RoutingStrategy.Bubble,
+        GetType(RoutedEventHandler),
+        GetType(Link))
+
+    ' Provide CLR accessors for the event
+    Public Custom Event DeleteLink As RoutedEventHandler
+        AddHandler(ByVal value As RoutedEventHandler)
+            Me.AddHandler(DeleteLinkEvent, value)
+        End AddHandler
+
+        RemoveHandler(ByVal value As RoutedEventHandler)
+            Me.RemoveHandler(DeleteLinkEvent, value)
+        End RemoveHandler
+
+        RaiseEvent(ByVal sender As Object, ByVal e As RoutedEventArgs)
+            Me.RaiseEvent(e)
+        End RaiseEvent
+    End Event
+
     Public Sub New()
         InitializeComponent() 'Instantiate ucLink in xaml
     End Sub
@@ -40,7 +63,11 @@
 
     Private Sub Delete_Link(ByVal sender As Object, ByVal e As MouseButtonEventArgs)
 
-        Debug.WriteLine("Delete Link Clicked! ")
+        Debug.WriteLine("Class Link Delete_Link Clicked! ")
+
+        'Bubble up the delete event to the MainWindow for processing.
+        Dim newEventArgs As New RoutedEventArgs(DeleteLinkEvent)
+        Me.RaiseEvent(newEventArgs)
 
     End Sub
 

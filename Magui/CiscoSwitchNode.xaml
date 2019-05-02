@@ -15,7 +15,8 @@
             MouseDown="Node_MouseDown"
             MouseMove="Node_MouseMove"
             MouseUp="Node_MouseUp"
-            Canvas.Left="10" Canvas.Top="10">
+            Cursor="Hand"
+            Canvas.Left="10" Canvas.Top="10" >
             <Rectangle.Fill>
                 <VisualBrush>
                     <VisualBrush.Visual>

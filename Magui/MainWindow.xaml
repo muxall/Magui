@@ -5,7 +5,9 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Magui"
         mc:Ignorable="d"
-        Title="Muxall Automation GUI" >
+        Title="Muxall Automation GUI" 
+        local:ClassNode.DeleteNode="Delete_Node"
+        local:Link.DeleteLink="Delete_Link">
 
     <Window.ContextMenu>
         <ContextMenu>
