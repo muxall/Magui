@@ -20,10 +20,17 @@
 
         </ContextMenu>
     </Window.ContextMenu>
-    
+
     <Canvas Name="canvasMain" >
+        <Menu>
+            <MenuItem Header="_File">
+                <MenuItem Header="_Open" Click="Open_File"/>
+                <MenuItem Header="_Save" Click="Save_File"/>
+                <MenuItem Header="SaveAs" Click="SaveAs_File"/>
+            </MenuItem>
+        </Menu>
         <!--<local:Node/>-->
     </Canvas>
- 
-    
+
+
 </Window>
