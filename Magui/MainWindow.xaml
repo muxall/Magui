@@ -7,17 +7,26 @@
         mc:Ignorable="d"
         Title="Muxall Automation GUI" 
         local:ClassNode.DeleteNode="Delete_Node"
-        local:Link.DeleteLink="Delete_Link">
+        local:ClassLink.DeleteLink="Delete_Link">
 
     <Window.ContextMenu>
         <ContextMenu>
-            <ListBoxItem Content="Add Router" MouseUp="Add_Router" />
-            <ListBoxItem Content="Add Switch" MouseUp="Add_Switch" />
-            <ListBoxItem Content="Add TestSet" MouseUp="Add_TestSet" />
-            <!--Not sure which is better? Maybe someone knows?-->
-            <ListBoxItem Content="Add Link" MouseUp="Add_Link" />
-            <!--<MenuItem Header="Add Link" Click="Add_Link"/>-->
-
+            <MenuItem Header="Add Router" >
+                <MenuItem Header="Cisco" Click="Add_Cisco_Router" />
+                <MenuItem Header="Juniper" Click="Add_Juniper_Router" />
+            </MenuItem>
+            <MenuItem Header="Add Switch" >
+                <MenuItem Header="Cisco" Click="Add_Cisco_Switch" />
+                <MenuItem Header="Metro" Click="Add_Metro_Switch" />
+            </MenuItem>
+            <MenuItem Header="Add TestSet" >
+                <MenuItem Header="Xena" Click="Add_Xena_TestSet" />
+                <MenuItem Header="Linux Workstation" Click="Add_Linux_TestSet" />
+            </MenuItem>
+            <MenuItem Header="Add Link" >
+                <MenuItem Header="Ethernet" Click="Add_Ethernet_Link" />
+                <MenuItem Header="Fiber" Click="Add_Fiber_Link" />
+            </MenuItem>
         </ContextMenu>
     </Window.ContextMenu>
 

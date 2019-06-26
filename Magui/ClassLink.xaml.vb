@@ -1,9 +1,10 @@
-﻿Public Class Link
+﻿Public Class ClassLink
 
-    Public linkType = "link"
-    Public linkIdx = 0
-    Public nodeA As Object
-    Public nodeB As Object
+
+    Public nodeA As ClassNode
+    Public nodeB As ClassNode
+
+    Property prop As ClassLinkProperties = New ClassLinkProperties
 
     ' Create a custom routed event by first registering a RoutedEventID
     ' This event uses the bubbling routing strategy
@@ -11,7 +12,7 @@
         "DeleteLink",
         RoutingStrategy.Bubble,
         GetType(RoutedEventHandler),
-        GetType(Link))
+        GetType(ClassLink))
 
     ' Provide CLR accessors for the event
     Public Custom Event DeleteLink As RoutedEventHandler
@@ -37,14 +38,28 @@
         InitializeComponent()   'Instantiate ucLink in xaml
         Me.nodeA = aNode
         Me.nodeB = bNode
+        prop.nodeA = nodeA.Name
+        prop.nodeB = nodeB.Name
         DrawLink()
 
     End Sub
 
+    Public Sub SetEndpoints(ByVal nA As String, ByVal nB As String)
+        For Each cn As ClassNode In colNodes
+            If nA Like cn.Name Then
+                Me.nodeA = cn
+            End If
+            If nB Like cn.Name Then
+                Me.nodeB = cn
+            End If
+        Next
+        Me.DrawLink()   'Redraw link with new endpoints.
+    End Sub
+
     Public Sub DrawLink()
         'Get the location of each node.  GetLocation returns the middle point of the node.
-        Dim aNodePoint As Point = Me.nodeA.GetLocation()
-        Dim bNodePoint As Point = Me.nodeB.GetLocation()
+        Dim aNodePoint As Point = Me.nodeA.GetCenterPoint()
+        Dim bNodePoint As Point = Me.nodeB.GetCenterPoint()
         Me.ucLink.X1 = aNodePoint.X
         Me.ucLink.Y1 = aNodePoint.Y
         Me.ucLink.X2 = bNodePoint.X

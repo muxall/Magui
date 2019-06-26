@@ -1,16 +1,12 @@
 ﻿
-Imports System.IO
-Imports System.Windows.Controls.Primitives
 
 Public Class MainWindow
 
     Public Sub New()
         ' This call is required by the designer.
         InitializeComponent()
-
-        If Not (Directory.Exists(defaultDir)) Then
-            Directory.CreateDirectory(defaultDir)
-        End If
+        'Verify and / or create the default directory for Magui configs.
+        VerifyCreateDir(defaultDir)
 
     End Sub
 
@@ -26,10 +22,38 @@ Public Class MainWindow
 
         ' Process open file dialog box results
         If result = True Then
+            'First we need to delete ALL the nodes and associated links.
+            If (colNodes.Count <> 0) Then
+                For Each cn As ClassNode In colNodes
+                    DeleteNode(cn)
+                Next
+            End If
+
             ' Open document
             Dim filename As String = dlg.FileName
-            Debug.WriteLine("Open File called: " & filename)
-            configFile = filename
+            Dim success As Boolean = OpenTestbed(filename)
+            If success Then
+                For Each cn As ClassNode In colNodes
+                    Debug.WriteLine("Adding Node to canvas: " & cn.Name)
+                    canvasMain.Children.Add(cn)                 'Add Router to Canvas
+                    cn.SetLocation(cn.prop.Left, cn.prop.Top)   'Moving node to its saved position on the Canvas
+                    Canvas.SetZIndex(cn, 10)                    'Move the Router image to the foreground.
+                Next
+                For Each cl As ClassLink In colLinks
+                    Debug.WriteLine("Adding Link to canvas: " & cl.Name)
+                    canvasMain.Children.Add(cl)         'Add Router to Canvas
+                    cl.SetEndpoints(cl.prop.NodeA, cl.prop.NodeB)   'Moving link to its saved position on the Canvas
+                Next
+            Else
+                Dim tst = DialogBox("Config file has 0 nodes.", "Do you want to open another file?")
+                If Not tst Then
+                    'TODO: OpenFileDialog: open another file
+                End If
+
+            End If
+
+            configFile = filename   'Set the active config to our new filename
+
         End If
 
     End Sub
@@ -74,131 +98,103 @@ Public Class MainWindow
         End If
     End Sub
 
-    Private Sub SaveTestbed(ByVal strFile As String)
-        ' Save document
-        Using sw As StreamWriter = New StreamWriter(strFile)
-            If colNodes.Count > 0 Then
-                For Each node As ClassNode In colNodes
-                    sw.WriteLine("NODE_START")
-                    sw.WriteLine("nodeName = " & node.Name)
-                    sw.WriteLine("nodeType = " & node.nodeType)
-                    Dim myLocation As Point = node.GetLocation()
-                    sw.WriteLine("left = " & myLocation.X)
-                    sw.WriteLine("top = " & myLocation.Y)
-                    sw.WriteLine("NODE_END")
-                Next
-            End If
-            If colLinks.Count > 0 Then
-                For Each link As Link In colLinks
-                    sw.WriteLine("LINK_START")
-                    sw.WriteLine("linkName = " & link.Name)
-                    sw.WriteLine("linkType = " & link.linkType)
-                    sw.WriteLine("nodeA = " & link.nodeA.Name)
-                    sw.WriteLine("nodeB = " & link.nodeB.Name)
-                    sw.WriteLine("LINK_END")
-                Next
-            End If
-            sw.Close()
-        End Using
+    Private Sub Add_Cisco_Router(ByVal sender As Object, ByVal e As RoutedEventArgs)
+        Dim Router As New CiscoRouterNode
+        AddRouter(Router, "Cisco")
     End Sub
 
-    Private Sub Add_Router(ByVal sender As Object, ByVal e As MouseButtonEventArgs)
-        Dim idx As Integer
-        Dim Router As New CiscoRouterNode
+    Private Sub Add_Juniper_Router(ByVal sender As Object, ByVal e As RoutedEventArgs)
+        Debug.WriteLine("Add_Juniper_Router called...")
+    End Sub
 
+    Private Sub AddRouter(ByVal router As ClassNode, ByVal make As String)
+        Dim idx As Integer
         'idx = canvasMain.Children.Add(Router)   'idx is a unique on the canvas.
-        canvasMain.Children.Add(Router)         'Add Router to Canvas
+        canvasMain.Children.Add(router)         'Add Router to Canvas
 
         'Get next available node index
         idx = GetAvailableNodeIndex()
-        Router.nodeIdx = idx                    'update the default index 0 to new index
-        Router.Name = "Router_" & idx           'give the Router a unique name.
-        Router.nodeType = "CiscoRouterNode"     'give the Router a type.
+        router.prop.Index = idx                          'update the default index 0 to new index
+        router.prop.Category = "Router"                      'give the node a Category.
+        router.Name = router.prop.Category & "_" & idx       'give the Router a unique name.
+        router.prop.Make = make                          'Manufacturer's Name Ex: Cisco
+        'router.prop.HostName = router.prop.Make & "_" & idx                     'Init the hostname
 
-        Canvas.SetZIndex(Router, 10)            'Move the Router image to the foreground.
+        Canvas.SetZIndex(router, 10)            'Move the Router image to the foreground.
 
         'Router.Name is the searchable key in the collection of nodes.
-        colNodes.Add(Router, Router.Name)
+        colNodes.Add(router, router.Name)
 
-        Debug.WriteLine("Add Router " & Router.Name)
-
+        Debug.WriteLine("Add Cisco Router " & router.Name)
     End Sub
 
-    Private Function GetAvailableNodeIndex()
 
+    Private Sub Add_Cisco_Switch(ByVal sender As Object, ByVal e As RoutedEventArgs)
+        Dim sw As New CiscoSwitchNode
+        AddSwitch(sw, "Cisco")
+    End Sub
+
+    Private Sub Add_Metro_Switch(ByVal sender As Object, ByVal e As RoutedEventArgs)
+        Debug.WriteLine("Add_Metro_Switch called...")
+    End Sub
+
+    Private Sub AddSwitch(ByVal sw As ClassNode, make As String)
         Dim idx As Integer
-        For idx = 0 To MaxNodes
-            Dim isFound As Boolean = False
-            For Each cn As ClassNode In colNodes
-                If cn.nodeIdx.Equals(idx) Then
-                    isFound = True
-                End If
-            Next
-            If Not isFound Then
-                Return idx
-            End If
-        Next
-        Return idx
 
-    End Function
-
-    Private Function GetAvailableLinkIndex()
-
-        Dim idx As Integer
-        For idx = 0 To MaxLinks
-            Dim isFound As Boolean = False
-            For Each l As Link In colLinks
-                If l.linkIdx.Equals(idx) Then
-                    isFound = True
-                End If
-            Next
-            If Not isFound Then
-                Return idx
-            End If
-        Next
-        Return idx
-
-    End Function
-
-
-    Private Sub Add_Switch(ByVal sender As Object, ByVal e As MouseButtonEventArgs)
-        Dim idx As Integer
-        Dim Eswitch As New CiscoSwitchNode
-        canvasMain.Children.Add(Eswitch)
+        canvasMain.Children.Add(sw)
         idx = GetAvailableNodeIndex()           'Get next available node index
-        Eswitch.nodeIdx = idx                   'update the default index 0 to new index
-        Eswitch.Name = "Eswitch_" & idx         'give the Eswitch a unique name.
-        Eswitch.nodeType = "CiscoSwitchNode"    'give the Eswitch a type.
+        sw.prop.Index = idx                   'update the default index 0 to new index
+        sw.prop.Category = "Switch"    'give the Eswitch a Category.
+        sw.Name = sw.prop.Category & "_" & idx         'give the Eswitch a unique name.
+        sw.prop.Make = make                          'Manufacturer's Name Ex: Cisco
+        'sw.prop.HostName = sw.prop.Make & "_" & idx                     'Init the hostname
 
-        Canvas.SetZIndex(Eswitch, 10)            'Move the Eswitch image to the foreground.
+        Canvas.SetZIndex(sw, 10)            'Move the Eswitch image to the foreground.
 
         'Eswitch.Name is the searchable key in the collection of nodes.
-        colNodes.Add(Eswitch, Eswitch.Name)
+        colNodes.Add(sw, sw.Name)
 
-        Debug.WriteLine("Add Eswitch Clicked! canvasIndex = " & idx)
-
+        Debug.WriteLine("Add switch Clicked! canvasIndex = " & idx)
     End Sub
 
-    Private Sub Add_TestSet(ByVal sender As Object, ByVal e As MouseButtonEventArgs)
+    Private Sub Add_Xena_TestSet(ByVal sender As Object, ByVal e As RoutedEventArgs)
+        Dim ts As New XenaTestSetNode
+        AddTestSet(ts, "Xena")
+    End Sub
+
+    Private Sub Add_Linux_TestSet(ByVal sender As Object, ByVal e As RoutedEventArgs)
+        Debug.WriteLine("Add_Linux_TestSet called...")
+    End Sub
+
+    Private Sub AddTestSet(ByVal testset As ClassNode, ByVal make As String)
         Dim idx As Integer
-        Dim Xena As New XenaTestNode
-        canvasMain.Children.Add(Xena)
+
+        canvasMain.Children.Add(testset)
         idx = GetAvailableNodeIndex()       'Get next available node index
-        Xena.nodeIdx = idx                  'update the default index 0 to new index
-        Xena.Name = "Xena_" & idx           'give the Xena a unique name.
-        Xena.nodeType = "XenaTestSet"       'give the TestSet a type
+        testset.prop.Index = idx                    'update the default index 0 to new index
+        testset.prop.Category = "TestSet"               'give the TestSet a Category
+        testset.Name = testset.prop.Category & "_" & idx           'give the Xena a unique name.
+        testset.prop.Make = make                          'Manufacturer's Name Ex: Xena
+        'testset.prop.HostName = testset.prop.Make & "_" & idx                     'Init the hostname
 
-        Canvas.SetZIndex(Xena, 10)          'Move the Xena image to the foreground.
+        Canvas.SetZIndex(testset, 10)          'Move the Xena image to the foreground.
 
-        'Xena.Name is the searchable key in the collection of nodes.
-        colNodes.Add(Xena, Xena.Name)
+        colNodes.Add(testset, testset.Name)
 
-        Debug.WriteLine("Add Xena TestSet Clicked! canvasIndex = " & idx)
-
+        Debug.WriteLine("Add TestSet Clicked! canvasIndex = " & idx)
     End Sub
 
+    Private Sub Add_Ethernet_Link(ByVal sender As Object, ByVal e As RoutedEventArgs)
+        Dim l As New ClassLink
+        AddLink(l, "Ethernet")
+    End Sub
 
-    Private Sub Add_Link(ByVal sender As Object, ByVal e As MouseButtonEventArgs)
+    Private Sub Add_Fiber_Link(ByVal sender As Object, ByVal e As RoutedEventArgs)
+        Dim l As New ClassLink
+        AddLink(l, "Fiber")
+    End Sub
+
+    Private Sub AddLink(ByVal link As ClassLink, ByVal cat As String)
         Dim idx As Integer
 
         Dim dlgLinkEditor As New LinkEditor
@@ -208,7 +204,7 @@ Public Class MainWindow
             Return
         End If
 
-        'Get selected nodes from Link Editor.
+        'Get selected nodes from ClassLink Editor.
         Dim aNodeName = dlgLinkEditor.lbNodeA.SelectedItem
         Dim bNodeName = dlgLinkEditor.lbNodeB.SelectedItem
 
@@ -217,16 +213,18 @@ Public Class MainWindow
         Dim aNodeObj As Object = colNodes.Item(aNodeName)
         Dim bNodeObj As Object = colNodes.Item(bNodeName)
 
-        'Create and draw link.
-        Dim myLink As New Link(aNodeObj, bNodeObj)
+        'Create and draw ClassLink.
+        Dim myLink As New ClassLink(aNodeObj, bNodeObj)
 
         canvasMain.Children.Add(myLink)
-        'Get next available Link index
+        'Get next available ClassLink index
         idx = GetAvailableLinkIndex()
 
         'Add a default name.  Probably will change later.
-        myLink.linkIdx = idx
-        myLink.Name = "link_" & idx
+        myLink.prop.Index = idx
+        myLink.prop.Category = cat
+        myLink.Name = myLink.prop.Category & "_" & idx
+
 
         'myLink.Name is the searchable key in the collection of links.
         For Each l In colLinks
@@ -235,7 +233,6 @@ Public Class MainWindow
         colLinks.Add(myLink, myLink.Name)
 
         Debug.WriteLine("Add Link Name = " & myLink.Name)
-
     End Sub
 
     Private Sub Delete_Node(sender As Object, e As RoutedEventArgs)
@@ -252,21 +249,12 @@ Public Class MainWindow
         ' Get the class node that raised the event. 
         Dim cn As ClassNode = DirectCast(e.Source, ClassNode)
 
-        Debug.Write("Node Type: ")
+        Debug.Write("Node Category: ")
         Debug.WriteLine(e.Source.[GetType]().ToString())
         Debug.WriteLine("Node Name: " + cn.Name)
         Debug.WriteLine("")
 
-        'First delete all dependent links associated with node
-        For Each l As Link In colLinks
-            If ((l.nodeA.Name.Equals(cn.Name)) Or (l.nodeB.Name.Equals(cn.Name))) Then
-                Me.Delete_Link(l)
-            End If
-        Next
-
-        'Second, delete the node
-        colNodes.Remove(cn.Name)
-        canvasMain.Children.Remove(cn)
+        Me.DeleteNode(cn)
 
         'This isn't really needed since MainWindow is our root
         'but it is good practice.
@@ -274,7 +262,29 @@ Public Class MainWindow
 
     End Sub
 
-    Private Sub Delete_Link(l As Link)
+    Public Sub DeleteNode(ByVal cn As ClassNode)
+
+        'First delete all dependent links associated with node
+        Me.DeleteAllNodeLinks(cn)
+
+        'Second, delete the node
+        colNodes.Remove(cn.Name)
+        canvasMain.Children.Remove(cn)
+
+    End Sub
+
+    Private Sub DeleteAllNodeLinks(cn As ClassNode)
+
+        'Delete all links associated with node
+        For Each l As ClassLink In colLinks
+            If ((l.nodeA.Name.Equals(cn.Name)) Or (l.nodeB.Name.Equals(cn.Name))) Then
+                Me.DeleteLink(l)
+            End If
+        Next
+
+    End Sub
+
+    Private Sub DeleteLink(l As ClassLink)
 
         colLinks.Remove(l.Name)
         canvasMain.Children.Remove(l)
@@ -292,20 +302,55 @@ Public Class MainWindow
         Debug.WriteLine(e.RoutedEvent.RoutingStrategy)
         Debug.WriteLine("")
 
-        ' Get the link that raised the event. 
-        Dim l As Link = DirectCast(e.Source, Link)
-        Debug.Write("Link Type: ")
+        ' Get the ClassLink that raised the event. 
+        Dim l As ClassLink = DirectCast(e.Source, ClassLink)
+        Debug.Write("ClassLink Type: ")
         Debug.WriteLine(e.Source.[GetType]().ToString())
         Debug.WriteLine("Node Name: " + l.Name)
         Debug.WriteLine("")
 
-        Me.Delete_Link(l)
+        Me.DeleteLink(l)
 
         'This isn't really needed since MainWindow is our root
         'but it is good practice.
         e.Handled = True
 
     End Sub
+
+    Private Function GetAvailableNodeIndex()
+
+        Dim idx As Integer
+        For idx = 0 To MaxNodes
+            Dim isFound As Boolean = False
+            For Each cn As ClassNode In colNodes
+                If cn.prop.Index.Equals(idx) Then
+                    isFound = True
+                End If
+            Next
+            If Not isFound Then
+                Return idx
+            End If
+        Next
+        Return idx
+
+    End Function
+
+    Private Function GetAvailableLinkIndex()
+        Dim idx As Integer
+        For idx = 0 To MaxLinks
+            Dim isFound As Boolean = False
+            For Each l As ClassLink In colLinks
+                If l.prop.Index.Equals(idx) Then
+                    isFound = True
+                End If
+            Next
+            If Not isFound Then
+                Return idx
+            End If
+        Next
+        Return idx
+
+    End Function
 
 End Class
 

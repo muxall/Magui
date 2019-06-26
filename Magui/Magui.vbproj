@@ -82,16 +82,19 @@
     <Compile Include="CiscoRouterNode.xaml.vb">
       <DependentUpon>CiscoRouterNode.xaml</DependentUpon>
     </Compile>
+    <Compile Include="ClassLinkProperties.vb" />
     <Compile Include="ClassNode.vb" />
-    <Compile Include="Link.xaml.vb">
-      <DependentUpon>Link.xaml</DependentUpon>
+    <Compile Include="ClassLink.xaml.vb">
+      <DependentUpon>ClassLink.xaml</DependentUpon>
     </Compile>
     <Compile Include="LinkEditor.xaml.vb">
       <DependentUpon>LinkEditor.xaml</DependentUpon>
     </Compile>
     <Compile Include="ModGlobals.vb" />
-    <Compile Include="XenaTestNode.xaml.vb">
-      <DependentUpon>XenaTestNode.xaml</DependentUpon>
+    <Compile Include="modIO.vb" />
+    <Compile Include="ClassNodeProperties.vb" />
+    <Compile Include="XenaTestSetNode.xaml.vb">
+      <DependentUpon>XenaTestSetNode.xaml</DependentUpon>
     </Compile>
     <Compile Include="XenaClient.xaml.vb">
       <DependentUpon>XenaClient.xaml</DependentUpon>
@@ -100,7 +103,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Link.xaml">
+    <Page Include="ClassLink.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -108,7 +111,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="XenaTestNode.xaml">
+    <Page Include="XenaTestSetNode.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
