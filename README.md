@@ -20,3 +20,9 @@ To learn more about the design and layout of Magui, see <a href="https://www.you
 <a href="https://youtu.be/7kiX8m-JSbs">NE #77 WPF Inherit Derived Class Functionality from a Base Class UserControl</a>
 
 <a href="https://youtu.be/qsl0hPCLehI">NE #80 WPF Bubble Up Command From Child: Implementing "Delete" for Nodes and Links </a>
+
+<a href="https://youtu.be/HZmhViSScok">NE #85 WPF UserControl Save and SaveAs : Writing a config file for our nodes and links. </a>
+
+<a href="https://youtu.be/Xd2ff_4g-Lg">NE #87 WPF Reflection PropertyInfo: New Config File Save </a>
+
+<a href="https://youtu.be/EXWhanHqLz0">NE #88 WPF Interaction CallByName: The new Config File Open</a>
