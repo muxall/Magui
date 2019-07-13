@@ -62,8 +62,12 @@ Public Class ClassNode : Inherits UserControl
 
     Public Sub Edit_Node(ByVal sender As Object, ByVal e As MouseButtonEventArgs)
 
-        Debug.WriteLine("Edit Node Clicked! Node: ")
-        'Debug.WriteLine("My Class Name = " & Me.Name)
+        Dim dlgNodeEditor As New NodeEditor(Me)
+        'dlgNodeEditor.Owner = Parent
+        dlgNodeEditor.ShowDialog()
+        If Not dlgNodeEditor.DialogResult Then
+            Return
+        End If
 
     End Sub
 

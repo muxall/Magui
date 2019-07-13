@@ -93,6 +93,18 @@
     <Compile Include="ModGlobals.vb" />
     <Compile Include="modIO.vb" />
     <Compile Include="ClassNodeProperties.vb" />
+    <Compile Include="NodeEditConfig.xaml.vb">
+      <DependentUpon>NodeEditConfig.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="NodeEditHome.xaml.vb">
+      <DependentUpon>NodeEditHome.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="NodeEditor.xaml.vb">
+      <DependentUpon>NodeEditor.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="OldNodeEditor.xaml.vb">
+      <DependentUpon>OldNodeEditor.xaml</DependentUpon>
+    </Compile>
     <Compile Include="XenaTestSetNode.xaml.vb">
       <DependentUpon>XenaTestSetNode.xaml</DependentUpon>
     </Compile>
@@ -108,6 +120,22 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="LinkEditor.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="NodeEditConfig.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="NodeEditHome.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="NodeEditor.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="OldNodeEditor.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -208,6 +236,9 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\favicon.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\logo_lt_blue_500x500.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
 </Project>

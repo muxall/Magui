@@ -1,10 +1,10 @@
 ﻿Imports System.IO
 Imports System.Reflection
 
-Module modIO
+Public Module modIO
 
     'Class used to process data
-    Private Class ClassKVP
+    Public Class ClassKVP
         Public Property key As String
         Public Property value As String
     End Class
