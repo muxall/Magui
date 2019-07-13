@@ -26,3 +26,5 @@ To learn more about the design and layout of Magui, see <a href="https://www.you
 <a href="https://youtu.be/Xd2ff_4g-Lg">NE #87 WPF Reflection PropertyInfo: New Config File Save </a>
 
 <a href="https://youtu.be/EXWhanHqLz0">NE #88 WPF Interaction CallByName: The new Config File Open</a>
+
+<a href="https://youtu.be/qYmKh3_XZ44">NE #89 WPF Desktop App Walkthrough Example: Magui’s Node Editor</a>
