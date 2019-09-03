@@ -117,6 +117,8 @@ Public Class MainWindow
         router.prop.Index = idx                          'update the default index 0 to new index
         router.prop.Category = "Router"                      'give the node a Category.
         router.Name = router.prop.Category & "_" & idx       'give the Router a unique name.
+        router.prop.Nickname = router.Name                     'Default Nickname to router.name
+        router.prop.HostName = router.Name                     'Default hostname to router.name
         router.prop.Make = make                          'Manufacturer's Name Ex: Cisco
         'router.prop.HostName = router.prop.Make & "_" & idx                     'Init the hostname
 
@@ -125,7 +127,7 @@ Public Class MainWindow
         'Router.Name is the searchable key in the collection of nodes.
         colNodes.Add(router, router.Name)
 
-        Debug.WriteLine("Add Cisco Router " & router.Name)
+        Debug.WriteLine("colNodes add Cisco router key: " & router.Name)
     End Sub
 
 
@@ -146,6 +148,8 @@ Public Class MainWindow
         sw.prop.Index = idx                   'update the default index 0 to new index
         sw.prop.Category = "Switch"    'give the Eswitch a Category.
         sw.Name = sw.prop.Category & "_" & idx         'give the Eswitch a unique name.
+        sw.prop.Nickname = sw.Name                     'Default Nickname to sw.name
+        sw.prop.HostName = sw.Name                     'Default hostname to sw.name
         sw.prop.Make = make                          'Manufacturer's Name Ex: Cisco
         'sw.prop.HostName = sw.prop.Make & "_" & idx                     'Init the hostname
 
@@ -154,7 +158,7 @@ Public Class MainWindow
         'Eswitch.Name is the searchable key in the collection of nodes.
         colNodes.Add(sw, sw.Name)
 
-        Debug.WriteLine("Add switch Clicked! canvasIndex = " & idx)
+        Debug.WriteLine("colNodes add switch key: " & sw.Name)
     End Sub
 
     Private Sub Add_Xena_TestSet(ByVal sender As Object, ByVal e As RoutedEventArgs)
@@ -174,6 +178,8 @@ Public Class MainWindow
         testset.prop.Index = idx                    'update the default index 0 to new index
         testset.prop.Category = "TestSet"               'give the TestSet a Category
         testset.Name = testset.prop.Category & "_" & idx           'give the Xena a unique name.
+        testset.prop.Nickname = testset.Name                     'Default Nickname to sw.name
+        testset.prop.HostName = testset.Name                     'Default hostname to sw.name
         testset.prop.Make = make                          'Manufacturer's Name Ex: Xena
         'testset.prop.HostName = testset.prop.Make & "_" & idx                     'Init the hostname
 
@@ -181,7 +187,7 @@ Public Class MainWindow
 
         colNodes.Add(testset, testset.Name)
 
-        Debug.WriteLine("Add TestSet Clicked! canvasIndex = " & idx)
+        Debug.WriteLine("colNodes add TestSet key: " & testset.Name)
     End Sub
 
     Private Sub Add_Ethernet_Link(ByVal sender As Object, ByVal e As RoutedEventArgs)

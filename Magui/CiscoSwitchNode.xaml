@@ -24,11 +24,12 @@
                             <StackPanel.Background>
                                 <ImageBrush ImageSource="Images/workgroup_switch.jpg"  />
                             </StackPanel.Background>
-                            <TextBlock  Margin="2,40,20,10" 
+                            <TextBlock  Name="txtLabel"
+                                        Margin="2,40,20,10" 
                                         Foreground="White"
                                         HorizontalAlignment="Center" 
                                         VerticalAlignment="Center"
-                                        Text="{Binding Name, ElementName=xamlName}" />
+                                        Text="{Binding Nickname, Mode=OneWay}" />
                         </StackPanel>
                     </VisualBrush.Visual>
                 </VisualBrush>

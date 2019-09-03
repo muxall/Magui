@@ -1,6 +1,6 @@
 ﻿
 Public Class CiscoRouterNode : Inherits ClassNode
-
+    'Dim bindLabel As New Binding
     Public Sub New()
         ' This call is required by the designer.
         InitializeComponent()
@@ -8,6 +8,13 @@ Public Class CiscoRouterNode : Inherits ClassNode
         'Pass the derived ucNode object reference to the base class.
         MyBase.dNode = Me.ucNode
         MyBase.dCanvas = Me.ucCanvas
+
+        'bindLabel.Mode = BindingMode.OneWay
+        'bindLabel.Source = prop.Nickname
+        'txtLabel.SetBinding(TextBlock.TextProperty, bindLabel)
+        'txtLabel.Text = "vbLabel"
+
+        txtLabel.DataContext = prop
 
     End Sub
 

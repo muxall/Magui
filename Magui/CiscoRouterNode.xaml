@@ -24,11 +24,14 @@
                             <StackPanel.Background>
                                 <ImageBrush ImageSource="Images/router.jpg"  />
                             </StackPanel.Background>
-                            <TextBlock  Margin="5,40,5,10" 
+                            <TextBlock  Name ="txtLabel"
+                                        Margin="5,40,5,10" 
                                         Foreground="White" 
                                         HorizontalAlignment="Center" 
-                                        VerticalAlignment="Center"
-                                        Text="{Binding Name, ElementName=xamlName}" />
+                                        VerticalAlignment="Center"                                         
+                                        Text="{Binding Nickname}"
+                                        />
+                                        <!--Text="{Binding Name, ElementName=xamlName}"-->
                         </StackPanel>
                     </VisualBrush.Visual>
                 </VisualBrush>

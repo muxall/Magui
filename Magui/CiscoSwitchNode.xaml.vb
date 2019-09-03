@@ -9,6 +9,8 @@ Public Class CiscoSwitchNode : Inherits ClassNode
         MyBase.dNode = Me.ucNode
         MyBase.dCanvas = Me.ucCanvas
 
+        txtLabel.DataContext = prop
+
     End Sub
 
     Private Sub SendCmd_Node(ByVal sender As Object, ByVal e As MouseButtonEventArgs)

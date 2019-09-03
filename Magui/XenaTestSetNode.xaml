@@ -26,11 +26,12 @@
                             <StackPanel.Background>
                                 <ImageBrush ImageSource="Images/Xena.jpg"  />
                             </StackPanel.Background>
-                            <TextBlock  Margin="5,45,5,0" 
+                            <TextBlock  Name="txtLabel"
+                                        Margin="5,45,5,0" 
                                         Foreground="Black" 
                                         HorizontalAlignment="Center" 
                                         VerticalAlignment="Center"
-                                        Text="{Binding Name, ElementName=xamlName}" />
+                                        Text="{Binding Nickname}" />
                         </StackPanel>
                     </VisualBrush.Visual>
                 </VisualBrush>
