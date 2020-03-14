@@ -28,3 +28,7 @@ To learn more about the design and layout of Magui, see <a href="https://www.you
 <a href="https://youtu.be/EXWhanHqLz0">NE #88 WPF Interaction CallByName: The new Config File Open</a>
 
 <a href="https://youtu.be/qYmKh3_XZ44">NE #89 WPF Desktop App Walkthrough Example: Magui’s Node Editor</a>
+
+<a href="https://youtu.be/Nq1UHVDt43c">NE #91 WPF Binding to Class object</a>
+
+<a href="https://youtu.be/bi5l8M1UUKc">NE #93 WPF Changing Runtime CLR Properties – Node Properties Editor</a>
