@@ -16,7 +16,14 @@
             </DataTemplate>
             <!-- Value item template -->
             <DataTemplate x:Key="valueItemTemplate">
-                <Label Content="{Binding Path=value}"/>
+                <!--<Label Content="{Binding Path=value}"/>-->
+                <TextBox Text="{Binding Path=value}" IsReadOnly="True">
+                    <TextBox.ContextMenu>
+                        <ContextMenu>
+                            <MenuItem Header="Edit" Click="Edit_Value" />
+                        </ContextMenu>
+                    </TextBox.ContextMenu>
+                </TextBox>
             </DataTemplate>
         </Grid.Resources>
         <Grid.Background>
@@ -49,8 +56,8 @@
 
             <!-- Name -->
             <StackPanel Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="0" Orientation="Horizontal">
-                <Label Margin="0,0,0,5" FontWeight="Bold">Name:</Label>
-                <Label Margin="0,0,0,5" FontWeight="Bold" Content="{Binding Path=Name}"></Label>
+                <TextBox Margin="0,0,0,5" FontWeight="Bold" IsReadOnly="True" Background="Transparent" BorderThickness="0">Name:</TextBox>
+                <TextBox Margin="0,0,0,5" FontWeight="Bold" Text="{Binding Path=prop.Nickname}" IsReadOnly="True" Background="Transparent" BorderThickness="0"></TextBox>
             </StackPanel>
 
             <!-- Department -->
@@ -62,7 +69,7 @@
             <Grid Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="2" VerticalAlignment="Top" 
                 HorizontalAlignment="Left">
                 <!-- Config Name and Value table -->
-                <DataGrid Name="kvpDataGrid" AutoGenerateColumns="False" RowHeaderWidth="0" >
+                <DataGrid Name="kvpDataGrid" AutoGenerateColumns="False" RowHeaderWidth="0" IsReadOnly="True"  >
                     <DataGrid.ColumnHeaderStyle>
                         <Style TargetType="{x:Type DataGridColumnHeader}">
                             <Setter Property="Height" Value="35" />
@@ -72,7 +79,7 @@
                         </Style>
                     </DataGrid.ColumnHeaderStyle>
                     <DataGrid.Columns>
-                        <DataGridTemplateColumn Header="Name" CellTemplate="{StaticResource nameItemTemplate}" />
+                        <DataGridTemplateColumn Header="Name" CellTemplate="{StaticResource nameItemTemplate}" IsReadOnly="True" />
                         <DataGridTemplateColumn Header="Value" CellTemplate="{StaticResource valueItemTemplate}" />
                     </DataGrid.Columns>
                 </DataGrid>

@@ -93,6 +93,9 @@
     <Compile Include="ModGlobals.vb" />
     <Compile Include="modIO.vb" />
     <Compile Include="ClassNodeProperties.vb" />
+    <Compile Include="NodeEditProp.xaml.vb">
+      <DependentUpon>NodeEditProp.xaml</DependentUpon>
+    </Compile>
     <Compile Include="NodeEditConfig.xaml.vb">
       <DependentUpon>NodeEditConfig.xaml</DependentUpon>
     </Compile>
@@ -122,6 +125,10 @@
     <Page Include="LinkEditor.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="NodeEditProp.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="NodeEditConfig.xaml">
       <SubType>Designer</SubType>

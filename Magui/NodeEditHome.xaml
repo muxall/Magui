@@ -37,9 +37,9 @@
             <Label VerticalAlignment="Center" Foreground="White">Names</Label>
         </Border>-->
 
-        <Label Grid.Column="1" Style="{StaticResource headerTextStyle}" 
-               Content="{Binding Path=Name}">
-        </Label>
+        <TextBox Grid.Column="1" Style="{StaticResource headerTextStyle}" 
+               Text="{Binding Path=prop.Nickname}" IsReadOnly="True" Background="Transparent" BorderThickness="0" >
+        </TextBox>
         <Border Grid.Column="1" Grid.Row="1" Style="{StaticResource listHeaderStyle}">
             <Label Style="{StaticResource listHeaderTextStyle}">Names</Label>
         </Border>
@@ -55,5 +55,6 @@
         
         <Button Grid.Column="1" Grid.Row="3" Style="{StaticResource buttonStyle}" 
                 Click="View_Button_Click">View</Button>
+        
     </Grid>
 </Page>

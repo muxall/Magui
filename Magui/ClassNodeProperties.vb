@@ -1,35 +1,24 @@
 ﻿Imports System.ComponentModel
 
 Public Class ClassNodeProperties
-    'Implements INotifyPropertyChanged
+    'A Class of Key Value pairs that have public getters and setters.  If you add a Public Property aka Key,
+    'You must give it view or edit permissions otherwise it will be hidden from the GUI.
 
-    'Class used to process data
-    Public Property HostName As String = "hostname"
-    'Private myNickname As String = "cnplabel"
-    Public Property Nickname As String = "cnpLabel"
+    'Location X,Y coordinates.
+    Public Property Left As Double = 0.0
+    Public Property Top As Double = 0.0
+
+    'Node data
     Public Property Index As Integer = 0
     Public Property Category As String = "node"
     Public Property Make As String = "make"
     Public Property Model As String = "model"
-    Public Property Left As Double = 0.0
-    Public Property Top As Double = 0.0
+    Public Property HostName As String = "hostname"
+    Public Property Nickname As String = "cnpLabel"
 
-    'Public Property Nickname() As String
-    '    Get
-    '        Return myNickname
-    '    End Get
-    '    Set(ByVal value As String)
-    '        myNickname = value
-    '        ' Call OnPropertyChanged whenever the property is updated
-    '        OnPropertyChanged("Nickname")
-    '    End Set
-    'End Property
-
-    'Public Event PropertyChanged As PropertyChangedEventHandler Implements INotifyPropertyChanged.PropertyChanged
-
-    '' Create the OnPropertyChanged method to raise the event
-    'Protected Sub OnPropertyChanged(ByVal name As String)
-    '    RaiseEvent PropertyChanged(Me, New PropertyChangedEventArgs(name))
-    'End Sub
+    'bView and bEdit are arrays of strings that set the attributes for the Public Property keys above.
+    ' None, ViewOnly, and ViewEdit are attr for bView and bEdit.  See modIO.vb for getter function.
+    Public bView() = {"Category", "Make"}
+    Public bEdit() = {"HostName", "Nickname", "Model"}
 
 End Class

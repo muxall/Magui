@@ -7,6 +7,7 @@ Public Module modIO
     Public Class ClassKVP
         Public Property key As String
         Public Property value As String
+        Public Property attr As String  'ViewOnly, ViewEdit, None
     End Class
 
     Public Sub VerifyCreateDir(dir As String)
@@ -130,6 +131,22 @@ Public Module modIO
             sw.Close()
         End Using
     End Sub
+
+    'This the getter function for ClassNodesProperties attributes.
+    Public Function GetNodePropertiesAttr(ByVal key As String, ByVal myNode As ClassNode) As String
+        Dim attr As String = "None"
+        If (myNode.prop.bEdit.Contains(key)) Then
+            attr = "ViewEdit"
+            Return attr
+        ElseIf (myNode.prop.bView.Contains(key)) Then
+            attr = "ViewOnly"
+            Return attr
+        Else
+            Return attr
+        End If
+    End Function
+
+
 
     Public Function DialogBox(ByVal title As String, ByVal msg As String) As Boolean
         Dim style As MsgBoxStyle
